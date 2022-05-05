@@ -1,0 +1,17 @@
+#ifdef GL_ES
+precision mediump float;
+#endif
+
+uniform vec2 u_resolution;
+uniform float u_time;
+
+vec2 rand (in vec2 st){
+	float y = fract(st.y/16.5)*87+ 102;
+	float x = fract(st.x/16.5)*30+ 122;
+	return vec2(x,y);
+}
+void main() {
+	vec2 st = gl_FragCoord.xy/u_resolution;
+	vec2 st2 = rand(st);
+	gl_FragColor = vec4(st.x, abs(sin(u_time) * 55 + 145), st2.x, 0.5);
+}
